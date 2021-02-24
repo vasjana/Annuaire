@@ -95,11 +95,11 @@ namespace Annuaire
 
         public Utilisateur(string nom, string prenom, string tel, string login, Adresse adresse) 
             {
-            this._Nom = nom;
-            this._Prenom = prenom;
-            this._NumeroDeTelephone = tel;
-            this._Login = login;
-            this._Adresse = adresse;
+               this._Nom = nom;
+               this._Prenom = prenom;
+               this._NumeroDeTelephone = tel;
+               this._Login = login;
+               this._Adresse = adresse;
             }
 
         #endregion
@@ -133,7 +133,7 @@ namespace Annuaire
 
         { 
 
-              Console.WriteLine("L'utilisateur " + this.Nom + " " + this.Prenom + ", avec numéro de téléphone " +
+            Console.WriteLine("L'utilisateur " + this.Nom + " " + this.Prenom + ", avec numéro de téléphone " +
                    this.Tel + ", login " + this.Login + " " +  this.Adresse.AfficherAdresse());
             Console.ReadLine();
              

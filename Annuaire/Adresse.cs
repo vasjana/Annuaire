@@ -99,7 +99,7 @@ namespace Annuaire
 
         public Adresse(string numeroderue, string nomderue, string codepostal, string ville, string pays)
         {
-           this._NumeroDeLaRue = numeroderue;
+            this._NumeroDeLaRue = numeroderue;
             this._NomDeLaRue = nomderue;
             this._CodePostal = codepostal;
             this._Ville = ville;

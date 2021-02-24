@@ -4,4 +4,3 @@ D:\csharp\Annuaire\Annuaire\bin\Debug\Annuaire.pdb
 D:\csharp\Annuaire\Annuaire\obj\Debug\Annuaire.csproj.CoreCompileInputs.cache
 D:\csharp\Annuaire\Annuaire\obj\Debug\Annuaire.exe
 D:\csharp\Annuaire\Annuaire\obj\Debug\Annuaire.pdb
-D:\csharp\Annuaire\Annuaire\obj\Debug\Annuaire.csprojAssemblyReference.cache
