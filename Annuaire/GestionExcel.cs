@@ -59,13 +59,20 @@ namespace Annuaire
 
 
         #region Constructeur
-
+        /// <summary>
+        /// Constructeur sans arguments
+        /// </summary>
         public GestionExcel()
         {
             this._Path = string.Empty;
             this._Utilisateur = new Utilisateur();    
         }
 
+        /// <summary>
+        /// Constructeur avec arguments
+        /// </summary>
+        /// <param name="path">Le chemin du fichier</param>
+        /// <param name="utilisateur">Un utilisateur</param>
         public GestionExcel( string path, Utilisateur utilisateur)
         {
             this._Path = path;
@@ -76,9 +83,11 @@ namespace Annuaire
 
         #region Méthodes
 
-
-        public void CreerExcelFile ()
-        { 
+        /// <summary>
+        /// Créer un fichier excel et remplir les informations d'utilisateur
+        /// </summary>
+        public void CreerExcelFile()
+        {
 
             // Creation d'un tableau excel
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
@@ -90,7 +99,7 @@ namespace Annuaire
                 if (excelWorksheet == null)
                 {
                     excelWorksheet = excel.Workbook.Worksheets.Add("Worksheet1");
-                   
+
 
                     List<string[]> headerRow = new List<string[]>()
                  {

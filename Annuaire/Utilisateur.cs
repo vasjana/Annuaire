@@ -88,6 +88,9 @@ namespace Annuaire
 
         #region Constructeur
 
+        /// <summary>
+        /// Constructeur sans arguments
+        /// </summary>
         public Utilisateur()
         {
             this._Nom = string.Empty;
@@ -97,6 +100,14 @@ namespace Annuaire
             this._Adresse = new Adresse();
         }
 
+        /// <summary>
+        /// Constructeur avec arguments
+        /// </summary>
+        /// <param name="nom">Le nom d'utilisateur</param>
+        /// <param name="prenom">Le prénom d'utilisateur</param>
+        /// <param name="tel">Le numéro de téléphone d'utilisateur</param>
+        /// <param name="login">Le login d'utilisateur</param>
+        /// <param name="adresse">L'adresse d'utilisateur</param>
         public Utilisateur(string nom, string prenom, string tel, string login, Adresse adresse) 
             {
                this._Nom = nom;
@@ -110,13 +121,16 @@ namespace Annuaire
 
         #region Méthodes
 
-
-        public Utilisateur  CreerUtilisateur()
+        /// <summary>
+        /// Créer un utilisateur à partir des entrées Console
+        /// </summary>
+        /// <returns>Un profil utilisateur</returns>
+        public Utilisateur CreerUtilisateur()
         {
             Console.WriteLine("Bienvenue! Veuillez rentrer vos informations: ");
             Console.WriteLine("Nom d' utilisateur: ");
-             string nom = Console.ReadLine();
-             Verifer(nom);
+            string nom = Console.ReadLine();
+            Verifer(nom);
 
             Console.WriteLine("Prénom d' utilisateur: ");
             string prenom = Console.ReadLine();
@@ -132,50 +146,67 @@ namespace Annuaire
             string login = Console.ReadLine();
             Verifer(login);
 
-           var  adresse = new Adresse();
-           adresse = adresse.CreerAdresse();
-            
+            var adresse = new Adresse();
+            adresse = adresse.CreerAdresse();
+
             var utilisateur = new Utilisateur(nom, prenom, tel, login, adresse);
             return utilisateur;
         }
 
+        /// <summary>
+        /// Afficher les informations d'utilisateur dans la Console
+        /// </summary>
         public void AfficherInformationUtilisateur()
+        {
+            Console.WriteLine("L'utilisateur " + this.Nom + " " + this.Prenom + ", avec numéro de téléphone " +
+                   this.Tel + ", login " + this.Login + " " + this.Adresse.AfficherAdresse());
 
-        { 
-
-            Console.WriteLine("L'utilisateur " +  this.Nom + " " + this.Prenom + ", avec numéro de téléphone " +
-                   this.Tel + ", login " + this.Login + " " +  this.Adresse.AfficherAdresse());
             Console.ReadLine();
-             
-           
         }
 
-        public string AfficherMajuscule ( string element)
+        /// <summary>
+        /// Convertir les caractères d'une chaine de caractères en majuscule
+        /// </summary>
+        /// <param name="element">Une chaine de caractère</param>
+        /// <returns>Une chaine de caractères en majuscule</returns>
+        private string AfficherMajuscule ( string element)
         {
             return string.Format(element.ToUpper(new CultureInfo("fr-FR", false)));
         }
 
-        public string AfficherPremiereLettreMajuscule ( string element)
+        /// <summary>
+        /// Convertir le premier caractère d'une chaine de caractères en majuscule
+        /// </summary>
+        /// <param name="element">Une chaine de caractère</param>
+        /// <returns>Une chaine de caractères avec le premier caractère en majuscule</returns>
+        private string AfficherPremiereLettreMajuscule ( string element)
         {
             return string.Format(element.Substring(0,1).ToUpper(new CultureInfo("fr-FR", false)) + element.Substring(1).ToLower(new CultureInfo("fr-FR", false)));
-            
         }
 
-        public void Verifer(string element)
+        /// <summary>
+        /// Vérifier si la chaine de caractère est vide ou null
+        /// </summary>
+        /// <param name="element">Une chaine de caractères</param>
+        private void Verifer(string element)
         {
             if (string.IsNullOrEmpty(element))
             {
                 throw new ArgumentNullException("element");
             }
-
-        else if (string.IsNullOrWhiteSpace(element))
+            else if (string.IsNullOrWhiteSpace(element))
             {
                 throw new ArgumentException("element");
             }
 
         }
 
-        public void FormaterStringNumeros(int length, string element)
+        /// <summary>
+        /// Vérifier la taille d'une chaine de caractères
+        /// </summary>
+        /// <param name="length">La taille d'une chaine de caractères</param>
+        /// <param name="element">Une chaine de caractères</param>
+        private void FormaterStringNumeros(int length, string element)
         {
             if (element.Length != length)
             {
@@ -183,6 +214,11 @@ namespace Annuaire
             }
         }
 
+        /// <summary>
+        /// Vérifier si la chaine de caractères a que des chiffres
+        /// </summary>
+        /// <param name="str">Une chaine de caractères</param>
+        /// <returns>Un boolean</returns>
         private bool IsDigitsOnly(string str)
         {
             foreach (char c in str)
@@ -194,8 +230,11 @@ namespace Annuaire
             return true;
         }
 
-
-        public void VerifierNumbers(string element)
+        /// <summary>
+        /// Vérifier si la chaine de caractères a que des chiffres
+        /// </summary>
+        /// <param name="element">Une chaine de caractères</param>
+        private void VerifierNumbers(string element)
         {
 
             if (!this.IsDigitsOnly(element))
