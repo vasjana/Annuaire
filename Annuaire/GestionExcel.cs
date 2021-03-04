@@ -34,6 +34,11 @@ namespace Annuaire
             }
             set
             {
+                if (value == null)
+                {
+                    throw new ArgumentNullException("value");
+                }
+
                 this._Path = value;
             }
         }
@@ -84,8 +89,8 @@ namespace Annuaire
                 // Load the worksheet
                 if (excelWorksheet == null)
                 {
-                   excelWorksheet = excel.Workbook.Worksheets.Add("Worksheet1");
-
+                    excelWorksheet = excel.Workbook.Worksheets.Add("Worksheet1");
+                   
 
                     List<string[]> headerRow = new List<string[]>()
                  {
@@ -145,41 +150,11 @@ namespace Annuaire
             }
         }
 
-       
-
 
         #endregion
 
-
-        //for (int row = 1; row <= rowCount - 1; row++)
-        //{
-        //Console.WriteLine("L'utilisateur : " + excelWorksheet.Cells[row + 1, 1].Value + ", son nom est " + excelWorksheet.Cells[row + 1, 2].Value
-        //    + " " + excelWorksheet.Cells[row + 1, 3].Value + ", son numéro de téléphone est " + excelWorksheet.Cells[row + 1, 4].Value
-        //    + ", son adresse est " + excelWorksheet.Cells[row + 1, 5].Value + "," + excelWorksheet.Cells[row + 1, 6].Value
-        //    + "," + excelWorksheet.Cells[row + 1, 7].Value + "," + excelWorksheet.Cells[row + 1, 8].Value + "," + excelWorksheet.Cells[row + 1, 9].Value
-        //    + ".");
-
-        ////Console.WriteLine("L'utilisateur : " + excelWorksheet.Cells[row + 1, col].Value + ", son nom est " + excelWorksheet.Cells[row + 1, col].Value
-        ////   + " " + excelWorksheet.Cells[row + 1, col].Value + ", son numéro de téléphone est " + excelWorksheet.Cells[row + 1, col].Value
-        ////   + ", son adresse est " + excelWorksheet.Cells[row + 1, col].Value + "," + excelWorksheet.Cells[row + 1, col].Value
-        ////   + "," + excelWorksheet.Cells[row + 1, col].Value + "," + excelWorksheet.Cells[row + 1, col].Value + "," + excelWorksheet.Cells[row + 1, col].Value
-        ////   + ".");
-
-        ////for (int col = 1; col <= colCount; col++)
-        ////    {
-
-        ////        Console.WriteLine("Le " + (row) + " utilisateur est " + excelWorksheet.Cells[row + 1, col].Value.ToString());
-        ////        Console.ReadLine();
-        ////    }
-
-        //}
-
-        //Console.ReadLine();
-
-
+      
     }
-
-
 
 
 } 

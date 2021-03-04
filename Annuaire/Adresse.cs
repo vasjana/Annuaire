@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,7 +38,7 @@ namespace Annuaire
         {
             get
             {
-                return this._NomDeLaRue;
+                return this.AfficherPremiereLettreMajuscule(_NomDeLaRue);
             }
             set
             {
@@ -62,7 +63,7 @@ namespace Annuaire
         {
             get
             {
-                return this._Ville;
+                return this.AfficherPremiereLettreMajuscule(_Ville);
             }
             set
             {
@@ -74,17 +75,17 @@ namespace Annuaire
         {
             get
             {
-                return this._Pays;
+                return this.AfficherPremiereLettreMajuscule(_Pays);
             }
             set
             {
-                this._Pays = value;
+               this._Pays = value;
             }
         }
 
         #endregion
 
-
+        
 
         #region Constructeur
 
@@ -114,18 +115,33 @@ namespace Annuaire
         {
             Console.WriteLine("Numéro de la rue: ");
             string numeroRue = Console.ReadLine();
+            Verifer(numeroRue);
+           if (numeroRue.Length > 2)
+            {
+                throw new ArgumentException( "Le numéro de la rue doit avoir maximum 2 chiffres.");
+            }
+            VerifierNumber(numeroRue);
+
+
 
             Console.WriteLine("Nom de la rue: ");
             string nomDeRue = Console.ReadLine();
+            Verifer(nomDeRue);
+
 
             Console.WriteLine("Code postal: ");
             string codePostal = Console.ReadLine();
+             Verifer(codePostal);            
+            FormaterStringNumeros(5, codePostal);
+            VerifierNumber(codePostal);
 
             Console.WriteLine("Nom de la ville: ");
             string ville = Console.ReadLine();
+            Verifer(ville);
 
             Console.WriteLine("Nom du pays: ");
             string pays = Console.ReadLine();
+            Verifer(pays);
 
            var adresse = new Adresse( numeroRue, nomDeRue, codePostal, ville, pays);
             return adresse;
@@ -136,6 +152,56 @@ namespace Annuaire
           return  String.Format("son adresse est " + this.NumeroDeRue + " ," + this.NomDeRue + " ," + this.CodePostal + "," + this.Ville 
                 + "," + this.Pays + ".");
            
+        }
+
+        public string AfficherPremiereLettreMajuscule(string element)
+        {
+            return string.Format(element.Substring(0, 1).ToUpper(new CultureInfo("fr-FR", false)) + element.Substring(1).ToLower(new CultureInfo("fr-FR", false)));
+
+        }
+
+        public void Verifer(string element)
+        {
+            if (string.IsNullOrEmpty(element))
+            {
+                throw new ArgumentNullException("element");
+            }
+
+            else if (string.IsNullOrWhiteSpace(element))
+            {
+                throw new ArgumentException("element");
+            }
+
+        }
+
+        public void FormaterStringNumeros(int length, string element)
+        {
+            if (element.Length != length)
+            {
+               throw new ArgumentFormatException(element + " doit avoir " + length + " chiffres.");
+            }
+         
+        }
+
+        private bool IsDigitsOnly(string str)
+        {
+            foreach (char c in str)
+            {
+                if (c < '0' || c > '9')
+                    return false;
+            }
+
+            return true;
+        }
+
+        public void VerifierNumber(string nombreTexte)
+        {
+
+            if (!this.IsDigitsOnly(nombreTexte))
+
+            {
+                throw new ArgumentFormatException(nombreTexte + " doit avoir que des chiffres.");
+            }
         }
 
         #endregion

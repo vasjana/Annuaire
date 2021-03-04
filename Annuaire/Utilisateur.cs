@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,10 +25,11 @@ namespace Annuaire
         {
             get
             {
-                return this._Nom;
+                return this.AfficherMajuscule(_Nom);
             }
             set
             {
+               
                 this._Nom = value;
             }
         }
@@ -36,7 +38,7 @@ namespace Annuaire
         {
             get
             {
-                return this._Prenom;
+                return this.AfficherPremiereLettreMajuscule(_Prenom);
             }
             set
             {
@@ -52,6 +54,7 @@ namespace Annuaire
             }
             set
             {
+                
                 this._NumeroDeTelephone = value;
             }
         }
@@ -64,6 +67,7 @@ namespace Annuaire
             }
             set
             {
+               
                 this._Login = value;
             }
         }
@@ -76,7 +80,7 @@ namespace Annuaire
             }
             set
             {
-                this._Adresse = value;
+               this._Adresse = value;
             }
         }
 
@@ -112,15 +116,21 @@ namespace Annuaire
             Console.WriteLine("Bienvenue! Veuillez rentrer vos informations: ");
             Console.WriteLine("Nom d' utilisateur: ");
              string nom = Console.ReadLine();
+             Verifer(nom);
 
             Console.WriteLine("Prénom d' utilisateur: ");
             string prenom = Console.ReadLine();
+            Verifer(prenom);
 
             Console.WriteLine("Numéro de téléphone d' utilisateur: ");
             string tel = Console.ReadLine();
+            Verifer(tel);
+            FormaterStringNumeros(10, tel);
+            VerifierNumbers(tel);
 
             Console.WriteLine("Login d' utilisateur: ");
             string login = Console.ReadLine();
+            Verifer(login);
 
            var  adresse = new Adresse();
            adresse = adresse.CreerAdresse();
@@ -133,14 +143,71 @@ namespace Annuaire
 
         { 
 
-            Console.WriteLine("L'utilisateur " + this.Nom + " " + this.Prenom + ", avec numéro de téléphone " +
+            Console.WriteLine("L'utilisateur " +  this.Nom + " " + this.Prenom + ", avec numéro de téléphone " +
                    this.Tel + ", login " + this.Login + " " +  this.Adresse.AfficherAdresse());
             Console.ReadLine();
              
            
         }
 
+        public string AfficherMajuscule ( string element)
+        {
+            return string.Format(element.ToUpper(new CultureInfo("fr-FR", false)));
+        }
 
-    #endregion
-}
+        public string AfficherPremiereLettreMajuscule ( string element)
+        {
+            return string.Format(element.Substring(0,1).ToUpper(new CultureInfo("fr-FR", false)) + element.Substring(1).ToLower(new CultureInfo("fr-FR", false)));
+            
+        }
+
+        public void Verifer(string element)
+        {
+            if (string.IsNullOrEmpty(element))
+            {
+                throw new ArgumentNullException("element");
+            }
+
+        else if (string.IsNullOrWhiteSpace(element))
+            {
+                throw new ArgumentException("element");
+            }
+
+        }
+
+        public void FormaterStringNumeros(int length, string element)
+        {
+            if (element.Length != length)
+            {
+                throw new ArgumentException(element + " doit avoir " + length + " chiffres.");
+            }
+        }
+
+        private bool IsDigitsOnly(string str)
+        {
+            foreach (char c in str)
+            {
+                if (c < '0' || c > '9')
+                    return false;
+            }
+
+            return true;
+        }
+
+
+        public void VerifierNumbers(string element)
+        {
+
+            if (!this.IsDigitsOnly(element))
+            {
+                throw new ArgumentException(element + " doit avoir que des chiffres.");
+            }
+        }
+        
+
+        #endregion
+
+
+
+    }
 }
